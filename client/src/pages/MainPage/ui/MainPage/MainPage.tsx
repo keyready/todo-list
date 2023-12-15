@@ -20,8 +20,8 @@ const MainPage = () => (
             <Text
                 text={
                     'Метод запроса - GET, в ответе жду массив вида ' +
-                    "[{id: 1, title: 'Закрыть сессию'}, {id: 2, title: " +
-                    "'Сделать домашку'}, ...]"
+                    "[{id: 1, title: 'Закрыть сессию', status: 'active'}, {id: 2, title: " +
+                    "'Сделать домашку', status: 'completed'}, ...]"
                 }
             />
         </VStack>
@@ -44,7 +44,7 @@ const MainPage = () => (
             <Text size="small" title="Посмотреть все тудушки можно вот" />
             <AppLink to={RoutePath.todolist}>тут</AppLink>
             <Text size="small" title=", а создать новую вот" />
-            <AppLink to="">тут</AppLink>
+            <AppLink to={RoutePath.createtodo}>тут</AppLink>
         </HStack>
     </Page>
 );

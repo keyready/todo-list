@@ -3,8 +3,8 @@ import { Todo } from '../model/types/Todo';
 
 const fetchAllTodosApi = rtkApi.injectEndpoints({
     endpoints: (build) => ({
-        getTodos: build.query<Todo[], void>({
-            query: (dir) => ({
+        getTodos: build.query<Todo[], string>({
+            query: () => ({
                 url: '/get_todos',
             }),
         }),

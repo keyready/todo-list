@@ -18,7 +18,12 @@ const TodoListPage = memo((props: TodoListPageProps) => {
         document.title = 'Список дел';
     }, []);
 
-    const { data: todos, isLoading: isTodosLoading, error: todosError, refetch } = useTodos();
+    const {
+        data: todos,
+        isLoading: isTodosLoading,
+        error: todosError,
+        refetch,
+    } = useTodos('', { refetchOnMountOrArgChange: true });
 
     return (
         <Page className={classNames(classes.TodoListPage, {}, [className])}>
@@ -26,9 +31,11 @@ const TodoListPage = memo((props: TodoListPageProps) => {
                 <Text title="Список всех тудушек" text="Как и обещал" />
             </VStack>
             {isTodosLoading && <Text text="Загрузка..." />}
-            {todos?.length && <TodosList todos={todos} onTodosListChange={refetch} />}
-            {!todos?.length && !isTodosLoading && !todosError && (
+            {todos?.length ? <TodosList todos={todos} onTodosListChange={refetch} /> : ''}
+            {!todos?.length && !isTodosLoading && !todosError ? (
                 <Text variant="warning" title="Тудушек пока нет( Надо бы создать парочку" />
+            ) : (
+                ''
             )}
             {todosError && (
                 <Text variant="error" title="Произошла ошибка во время загрузки данных" />

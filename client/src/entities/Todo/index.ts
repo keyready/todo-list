@@ -5,3 +5,4 @@ export { getTodoData, getTodoIsLoading, getTodoError } from './model/selectors/T
 
 export { TodoCard } from './ui/TodoCard/TodoCard';
 export { TodosList } from './ui/TodosList/TodosList';
+export { CreateTodo } from './ui/CreateTodo/CreateTodo';
