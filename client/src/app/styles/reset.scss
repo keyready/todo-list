@@ -1,0 +1,13 @@
+li {
+    list-style: circle inside;
+}
+
+body, h1, h2, h3, h4, h5, h6, li, ul, textarea, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.p-icon {
+    margin-right: 10px;
+}

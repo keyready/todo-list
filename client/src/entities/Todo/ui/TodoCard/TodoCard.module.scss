@@ -1,0 +1,11 @@
+.TodoCard {
+    padding: 10px 30px;
+    border-radius: 10px;
+    outline: 2px solid var(--primary-color);
+}
+
+.completed {
+    color: green;
+    text-decoration: line-through;
+    font-style: italic;
+}
