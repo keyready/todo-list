@@ -9,3 +9,13 @@
     text-decoration: line-through;
     font-style: italic;
 }
+
+.title {
+    cursor: pointer;
+}
+
+.newTitleInput {
+    width: auto;
+    font: var(--font-l);
+    font-weight: bold;
+}
