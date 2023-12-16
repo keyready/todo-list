@@ -5,6 +5,8 @@ import { Input } from 'shared/UI/Input';
 import { Button } from 'primereact/button';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { createTodo } from 'entities/Todo/model/services/createTodo';
+import { useNavigate } from 'react-router-dom';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import classes from './CreateTodo.module.scss';
 
 interface CreateTodoProps {
@@ -17,14 +19,18 @@ export const CreateTodo = memo((props: CreateTodoProps) => {
     const [title, setTitle] = useState<string>('');
 
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const handleFormSubmit = useCallback(
         async (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
-            await dispatch(createTodo(title));
-            setTitle('');
+            const result = await dispatch(createTodo(title));
+            if (result.meta.requestStatus === 'fulfilled') {
+                setTitle('');
+                navigate(RoutePath.todolist);
+            }
         },
-        [dispatch, title],
+        [dispatch, navigate, title],
     );
 
     return (
@@ -37,7 +43,7 @@ export const CreateTodo = memo((props: CreateTodoProps) => {
                     autoFocus
                     value={title}
                     onChange={setTitle}
-                    placeholder="Введите название новой задачи"
+                    placeholder="Введите название новой тудушки"
                 />
                 <Button type="submit" severity={title ? 'success' : 'danger'} disabled={!title}>
                     Создать!

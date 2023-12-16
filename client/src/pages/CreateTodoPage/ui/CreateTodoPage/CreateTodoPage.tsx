@@ -18,7 +18,7 @@ const CreateTodoPage = memo((props: CreateTodoPageProps) => {
 
     return (
         <Page className={classNames(classes.CreateTodoPage, {}, [className])}>
-            <Text title="Давай создадим задачу!" size="large" />
+            <Text title="Давай создадим тудушку!" size="large" />
             <CreateTodo />
         </Page>
     );
