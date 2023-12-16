@@ -15,7 +15,7 @@ const TodoListPage = memo((props: TodoListPageProps) => {
     const { className } = props;
 
     useEffect(() => {
-        document.title = 'Список дел';
+        document.title = 'Список тудушек';
     }, []);
 
     const {
@@ -28,7 +28,7 @@ const TodoListPage = memo((props: TodoListPageProps) => {
     return (
         <Page className={classNames(classes.TodoListPage, {}, [className])}>
             <VStack maxW gap="8" className={classes.title}>
-                <Text title="Список всех тудушек" text="Как и обещал" />
+                <Text size="large" title="Список всех тудушек" />
             </VStack>
             {isTodosLoading && <Text text="Загрузка..." />}
             {todos?.length ? <TodosList todos={todos} onTodosListChange={refetch} /> : ''}

@@ -1,0 +1,12 @@
+.linkText {
+    transition: 100ms;
+
+    &:hover {
+        color: var(--link-hover-color);
+    }
+}
+
+.activeLink {
+    font-weight: bold !important;
+    text-decoration: underline;
+}
