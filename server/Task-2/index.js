@@ -93,4 +93,20 @@ app.post("/delete_todo", async (req, res) => {
   }
 });
 
+app.post("/change_todo_title", async (req, res) => {
+  try {
+    const { newTitle, todoId } = req.body;
+
+    await TodoModel.update({ title: newTitle }, { where: { id: todoId } });
+
+    const todosList = await TodoModel.findAll({ raw: true });
+
+    return res.status(200).json(todosList);
+  } catch (e) {
+    return res
+      .status(500)
+      .json({ message: "На сервере что-то громко упало..." });
+  }
+});
+
 StartServer();

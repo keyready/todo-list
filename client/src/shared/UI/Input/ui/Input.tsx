@@ -1,4 +1,5 @@
 import React, { InputHTMLAttributes, memo, useEffect, useRef } from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
 import classes from './Input.module.scss';
 
 type HTMLInputProps = Omit<
@@ -16,7 +17,7 @@ interface InputProps extends HTMLInputProps {
 
 export const Input = memo((props: InputProps) => {
     const ref = useRef<HTMLInputElement>(null);
-    const { value, onChange, type = 'text', autoFocus, readonly, ...otherProps } = props;
+    const { className, value, onChange, type = 'text', autoFocus, readonly, ...otherProps } = props;
 
     useEffect(() => {
         if (autoFocus) {
@@ -33,7 +34,7 @@ export const Input = memo((props: InputProps) => {
             ref={ref}
             value={value || ''}
             onChange={onChangeHandler}
-            className={classes.Input}
+            className={classNames(classes.Input, {}, [className])}
             type={type}
             readOnly={readonly}
             {...otherProps}
