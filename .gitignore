@@ -1,5 +1,8 @@
 /.idea
+/node_modules
 
 /server/node_modules
+/server/index.js
+/server/package*.json
 
-/client
+/client/node_modules
