@@ -1,14 +1,35 @@
-свой сервер ты будешь писать в директории `./server`  
-сервер запускай на `PORT = 5000`  
-вся статика лежит в `../build`  
+# Задачи
+**1. Релизовать базовый CRUD-api (без базы данных) с тудушками:**
+1. **Создание тудушки**  
+   Запрос `POST /create_todo` c `body={title: string}`
+2. **Удаление тудушки**  
+   Запрос `POST /delete_todo` c `body={todoId: number}`
+3. **Получение всех тудушек**  
+   Запрос `GET /get_toodos` в ответ жду
+   ```
+   {
+      todos: [ 
+         { id: number, title: string, status: 'active' | 'completed' },
+         {...},
+          ...
+      ]
+   }
+   ```
+7. **Изменение статуса тудушки (`'active' -> 'completed'`)**  
+   Запрос `POST /complete_todo` c `body={todoId: number}`
+8. **Изменение названия тудушки**  
+   Запрос `POST /change_todo_title` c `body={todoId: number, newTitle: string}`
+___
+**2. Подключить базу данных и релизовать базовый CRUD-api:**
+1. Создать директорию `config` с файлом `db.connect.js`, настроить там подлючение к бд
+2. Создать директорию `models` с файлом `todo.model.js`, описать модель тудушкки:
+   ```
+   title: string
+   status: string, значение по умолчанию: 'active'
+   ```
+3. Изменить файл сервера так, чтобы тудушки хранились в базе данных
 
- - т.е. у себя ты пишешь  
-    ```javascript
-    app.use(express.json())
-    app.use(express.static(path.resolve(__dirname, '../build')))
-    ```  
-    
- - и по корневому маршруту (`app.get('/', (...)`) ты отдаешь файлик  
-    ```javascript 
-    res.sendFile(path.resolve(__dirname, '../build/index.html')))
-    ```
+___
+**3. Создание персональных тудушек**
+1. Реализовать авторизацию и регистрацию на сервере
+2. Продумать, как определять пользователя: авторизован он или нет, и если да, - кто он?
