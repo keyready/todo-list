@@ -9,9 +9,11 @@ import { AxiosInstance } from 'axios';
 import { UISchema } from 'features/UI';
 import { rtkApi } from 'shared/api/rtkApi';
 import { TodoSchema } from 'entities/Todo';
+import { UserSchema } from 'entities/User';
 
 export interface StateSchema {
     ui: UISchema;
+    user: UserSchema;
     todo: TodoSchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 

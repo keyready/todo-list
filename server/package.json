@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start:t1": "nodemon Task-1/index.js",
-    "start:t2": "nodemon Task-2/index.js"
+    "start:t2": "nodemon Task-2/index.js",
+    "start:t3": "nodemon Task-3/index.js"
   },
   "keywords": [],
   "author": "",
