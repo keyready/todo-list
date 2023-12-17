@@ -3,8 +3,9 @@ import { Page } from 'widgets/Page/Page';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { Text } from 'shared/UI/Text';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { LoginUserForm, RegisterUserForm } from 'entities/User';
+import { LoginUserForm, RegisterUserForm, UserActions } from 'entities/User';
 import { TabPanel, TabView } from 'primereact/tabview';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import classes from './AuthorizationPage.module.scss';
 
 interface AuthorizationPageProps {
@@ -20,8 +21,10 @@ const AuthorizationPage = memo((props: AuthorizationPageProps) => {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const [redirectedFrom, setRedirectedFrom] = useState<string>('');
+    const [currentTab, setCurrentTab] = useState<number>(0);
 
     useEffect(() => {
         if (location.state?.from) {
@@ -33,6 +36,11 @@ const AuthorizationPage = memo((props: AuthorizationPageProps) => {
         navigate(redirectedFrom);
     }, [navigate, redirectedFrom]);
 
+    const handleTabChange = useCallback(() => {
+        dispatch(UserActions.resetErrors());
+        setCurrentTab((prevState) => (prevState === 1 ? 0 : 1));
+    }, [dispatch]);
+
     return (
         <Page className={classNames(classes.AuthorizationPage, {}, [className])}>
             {redirectedFrom ? (
@@ -41,7 +49,11 @@ const AuthorizationPage = memo((props: AuthorizationPageProps) => {
                 <Text align="center" title="Авторизуйтесь" />
             )}
 
-            <TabView className={classes.tabs}>
+            <TabView
+                className={classes.tabs}
+                activeIndex={currentTab}
+                onTabChange={handleTabChange}
+            >
                 <TabPanel header="Авторизация">
                     <LoginUserForm onLogin={onSuccessfulAuth} />
                 </TabPanel>

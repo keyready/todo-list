@@ -8,13 +8,13 @@ interface LoginUserProps {
     password: string;
 }
 
-export const createUser = createAsyncThunk<User, LoginUserProps, ThunkConfig<string>>(
-    'User/createUser',
-    async (newUser, thunkAPI) => {
+export const loginUser = createAsyncThunk<User, LoginUserProps, ThunkConfig<string>>(
+    'User/loginUser',
+    async (userData, thunkAPI) => {
         const { extra, rejectWithValue } = thunkAPI;
 
         try {
-            const response = await extra.api.post<User>('/create_user', newUser);
+            const response = await extra.api.post<User>('/login_user', userData);
 
             if (!response.data) {
                 throw new Error();

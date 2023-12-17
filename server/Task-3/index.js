@@ -9,8 +9,7 @@ const cors = require("cors");
 const port = 5000;
 
 const database = require("./config/db.connect");
-const { TodoModel } = require("./models");
-const { where } = require("sequelize");
+const { TodoModel, UserModel } = require("./models");
 
 const app = express();
 
@@ -145,6 +144,61 @@ app.post("/change_todo_title", authMiddleware, async (req, res) => {
     const todosList = await TodoModel.findAll({ raw: true });
 
     return res.status(200).json(todosList);
+  } catch (e) {
+    return res
+      .status(500)
+      .json({ message: "На сервере что-то громко упало..." });
+  }
+});
+
+app.post("/create_user", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const candidate = await UserModel.findOne({
+      raw: true,
+      where: { username },
+    });
+
+    if (candidate) {
+      return res
+        .status(409)
+        .json({ message: "Пользователь с таким именем уже существует" });
+    }
+
+    const newUser = await UserModel.create({
+      username,
+      password,
+    });
+
+    return res.status(201).json(newUser);
+  } catch (e) {
+    return res
+      .status(500)
+      .json({ message: "На сервере что-то громко упало..." });
+  }
+});
+
+app.post("/login_user", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const candidate = await UserModel.findOne({
+      raw: true,
+      where: { username },
+    });
+
+    if (!candidate) {
+      return res
+        .status(404)
+        .json({ message: "Пользователь с таким именем не найден" });
+    }
+
+    if (candidate.password !== password) {
+      return res.status(403).json({ message: "Неверный пароль" });
+    }
+
+    return res.status(200).json(candidate);
   } catch (e) {
     return res
       .status(500)
