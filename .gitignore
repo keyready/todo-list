@@ -1,5 +1,10 @@
 /.idea
+/node_modules
 
 /server/node_modules
+/server/Task-1
+/server/Task-2
+/server/index.js
+/server/package*.json
 
 /client/node_modules
