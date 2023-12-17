@@ -5,7 +5,9 @@ import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { NavbarLink } from 'shared/UI/NavbarLink';
 import { Button } from 'primereact/button';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { UserActions } from 'entities/User';
+import { getUserData, UserActions } from 'entities/User';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import classes from './Navbar.module.scss';
 
 export interface NavbarProps {
@@ -14,10 +16,17 @@ export interface NavbarProps {
 
 export const Navbar = memo(({ className }: NavbarProps) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
-    const handleLogout = useCallback(() => {
+    const userData = useSelector(getUserData);
+
+    const handleLogoutClick = useCallback(() => {
         dispatch(UserActions.logout());
     }, [dispatch]);
+
+    const handleLoginClick = useCallback(() => {
+        navigate(RoutePath.authorization);
+    }, [navigate]);
 
     return (
         <HStack maxW justify="between" className={classNames(classes.Navbar, {}, [className])}>
@@ -27,9 +36,13 @@ export const Navbar = memo(({ className }: NavbarProps) => {
                 <NavbarLink to={RoutePath.createtodo} text="Создать тудушку" />
             </HStack>
 
-            <Button severity="danger" onClick={handleLogout}>
-                Выйти
-            </Button>
+            {userData ? (
+                <Button severity="danger" onClick={handleLogoutClick}>
+                    Выйти
+                </Button>
+            ) : (
+                <Button onClick={handleLoginClick}>Войти</Button>
+            )}
         </HStack>
     );
 });

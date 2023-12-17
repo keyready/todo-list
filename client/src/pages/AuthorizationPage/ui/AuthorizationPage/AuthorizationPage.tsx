@@ -44,7 +44,7 @@ const AuthorizationPage = memo((props: AuthorizationPageProps) => {
     return (
         <Page className={classNames(classes.AuthorizationPage, {}, [className])}>
             {redirectedFrom ? (
-                <Text align="center" title="Прежде, чем посетить эту страницу, автризуйтесь" />
+                <Text align="center" title="Прежде, чем посетить эту страницу, авторизуйтесь" />
             ) : (
                 <Text align="center" title="Авторизуйтесь" />
             )}
