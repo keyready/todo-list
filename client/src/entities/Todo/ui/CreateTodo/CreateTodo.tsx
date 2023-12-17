@@ -2,11 +2,14 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { FormEvent, memo, useCallback, useState } from 'react';
 import { VStack } from 'shared/UI/Stack';
 import { Input } from 'shared/UI/Input';
+import { Text } from 'shared/UI/Text';
 import { Button } from 'primereact/button';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { createTodo } from 'entities/Todo/model/services/createTodo';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import { useSelector } from 'react-redux';
+import { getTodoError } from '../../model/selectors/TodoSelectors';
 import classes from './CreateTodo.module.scss';
 
 interface CreateTodoProps {
@@ -20,6 +23,8 @@ export const CreateTodo = memo((props: CreateTodoProps) => {
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const todoCreationError = useSelector(getTodoError);
 
     const handleFormSubmit = useCallback(
         async (event: FormEvent<HTMLFormElement>) => {
@@ -48,6 +53,8 @@ export const CreateTodo = memo((props: CreateTodoProps) => {
                 <Button type="submit" severity={title ? 'success' : 'danger'} disabled={!title}>
                     Создать!
                 </Button>
+
+                {todoCreationError && <Text title={todoCreationError} variant="error" />}
             </VStack>
         </form>
     );
