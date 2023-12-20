@@ -5,7 +5,7 @@ const { log } = require("console");
 
 const app = express();
 const port = 5000;
-const todos_list = [
+let todos_list = [
   { id: 1, title: "Вечерний хлобысь", status: "active" },
   { id: 2, title: "Вечерний хлобысь", status: "active" },
   { id: 3, title: "Вечерний хлобысь", status: "active" },
@@ -37,6 +37,13 @@ app.post("/complete_todo", (req, res) => {
     }
   });
 
+  return res.status(200).json(todos_list);
+});
+
+app.post("/delete_todo", (req, res) => {
+  const { todoId } = req.body;
+
+  todos_list = todos_list.filter((todo) => todoId !== todo.id);
   return res.status(200).json(todos_list);
 });
 
