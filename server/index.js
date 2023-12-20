@@ -59,6 +59,18 @@ app.post("/create_todo", (req, res) => {
   return res.status(201).json(todos_list);
 });
 
+app.post("/change_todo_title", (req, res) => {
+  const { todoId, newTitle } = req.body;
+
+  todos_list.map((todo) => {
+    if (todo.id === todoId) {
+      todo.title = newTitle;
+    }
+  });
+
+  return res.status(200).json(todos_list);
+});
+
 app.get("/*", (req, res) => {
   return res.sendFile(path.resolve(__dirname, "../dist/index.html"));
 });
