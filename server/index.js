@@ -60,15 +60,19 @@ app.post("/create_todo", (req, res) => {
 });
 
 app.post("/change_todo_title", (req, res) => {
-  const { todoId, newTitle } = req.body;
+  try {
+    const { todoId, newTitle } = req.body;
 
-  todos_list.map((todo) => {
-    if (todo.id === todoId) {
-      todo.title = newTitle;
-    }
-  });
+    todos_list.map((todo) => {
+      if (todo.id === todoId) {
+        todo.title = newTitle;
+      }
+    });
 
-  return res.status(200).json(todos_list);
+    return res.status(200).json(todos_list);
+  } catch (error) {
+    return res.status(500).json({ message: "что-то сломалось" });
+  }
 });
 
 app.get("/*", (req, res) => {
