@@ -47,6 +47,18 @@ app.post("/delete_todo", (req, res) => {
   return res.status(200).json(todos_list);
 });
 
+app.post("/create_todo", (req, res) => {
+  const { title } = req.body;
+
+  todos_list.push({
+    title: title,
+    status: "active",
+    id: todos_list.length + 1,
+  });
+
+  return res.status(201).json(todos_list);
+});
+
 app.get("/*", (req, res) => {
   return res.sendFile(path.resolve(__dirname, "../dist/index.html"));
 });
