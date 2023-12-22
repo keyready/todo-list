@@ -2,8 +2,5 @@
 /node_modules
 
 /server/node_modules
-/server/Task-1
-/server/Task-2
-/server/index.js
 
 /client/node_modules

@@ -12,47 +12,67 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "../dist")));
 
 app.post("/login_user", (req, res) => {
-  const { username } = req.body;
-  return res.status(200).json({
-    id: 1,
-    username,
-  });
+  try {
+    const { username } = req.body;
+    return res.status(200).json({
+      id: 1,
+      username,
+    });
+  }catch (error) {
+    return res.status(500).json({ message: "что-то сломалось" });
+  }
 });
 
 
 app.get("/get_todos", (req, res) => {
-  res.status(200).json(todos_list);
+  try{
+    res.status(200).json(todos_list);
+}catch (error) {
+  return res.status(500).json({ message: "что-то сломалось" });
+}
 });
 
 app.post("/complete_todo", (req, res) => {
-  const { todoId } = req.body;
+  try{
+    const { todoId } = req.body;
 
-  todos_list.map((element) => {
-    if (todoId === element.id) {
-      element.status = "completed";
-    }
-  });
+    todos_list.map((element) => {
+      if (todoId === element.id) {
+        element.status = "completed";
+      }
+    });
 
-  return res.status(200).json(todos_list);
+    return res.status(200).json(todos_list);
+  }catch (error) {
+    return res.status(500).json({ message: "что-то сломалось" });
+  }
 });
 
 app.post("/delete_todo", (req, res) => {
-  const { todoId } = req.body;
+  try {
+    const { todoId } = req.body;
 
-  todos_list = todos_list.filter((todo) => todoId !== todo.id);
-  return res.status(200).json(todos_list);
+    todos_list = todos_list.filter((todo) => todoId !== todo.id);
+    return res.status(200).json(todos_list);
+  }catch (error) {
+    return res.status(500).json({ message: "что-то сломалось" });
+  }
 });
 
 app.post("/create_todo", (req, res) => {
-  const { title } = req.body;
+  try {
+    const { title } = req.body;
 
-  todos_list.push({
-    title: title,
-    status: "active",
-    id: todos_list.length + 1,
-  });
+    todos_list.push({
+      title: title,
+      status: "active",
+      id: todos_list.length + 1,
+    });
 
-  return res.status(201).json(todos_list);
+    return res.status(201).json(todos_list);
+  }catch (error) {
+    return res.status(500).json({ message: "что-то сломалось" });
+  }
 });
 
 app.post("/change_todo_title", (req, res) => {
@@ -72,7 +92,11 @@ app.post("/change_todo_title", (req, res) => {
 });
 
 app.get("/*", (req, res) => {
-  return res.sendFile(path.resolve(__dirname, "../dist/index.html"));
+  try {
+    return res.sendFile(path.resolve(__dirname, "../dist/index.html"));
+  }catch (error) {
+    return res.status(500).json({ message: "что-то сломалось" });
+  }
 });
 
 app.listen(port, () => {
