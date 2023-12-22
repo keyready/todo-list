@@ -18,7 +18,7 @@ app.post("/login_user", (req, res) => {
       id: 1,
       username,
     });
-  }catch (error) {
+  } catch (error) {
     return res.status(500).json({ message: "что-то сломалось" });
   }
 });
@@ -27,7 +27,7 @@ app.post("/login_user", (req, res) => {
 app.get("/get_todos", (req, res) => {
   try{
     res.status(200).json(todos_list);
-}catch (error) {
+} catch (error) {
   return res.status(500).json({ message: "что-то сломалось" });
 }
 });
@@ -43,7 +43,7 @@ app.post("/complete_todo", (req, res) => {
     });
 
     return res.status(200).json(todos_list);
-  }catch (error) {
+  } catch (error) {
     return res.status(500).json({ message: "что-то сломалось" });
   }
 });
@@ -54,7 +54,7 @@ app.post("/delete_todo", (req, res) => {
 
     todos_list = todos_list.filter((todo) => todoId !== todo.id);
     return res.status(200).json(todos_list);
-  }catch (error) {
+  } catch (error) {
     return res.status(500).json({ message: "что-то сломалось" });
   }
 });
@@ -70,7 +70,7 @@ app.post("/create_todo", (req, res) => {
     });
 
     return res.status(201).json(todos_list);
-  }catch (error) {
+  } catch (error) {
     return res.status(500).json({ message: "что-то сломалось" });
   }
 });
@@ -94,7 +94,7 @@ app.post("/change_todo_title", (req, res) => {
 app.get("/*", (req, res) => {
   try {
     return res.sendFile(path.resolve(__dirname, "../dist/index.html"));
-  }catch (error) {
+  } catch (error) {
     return res.status(500).json({ message: "что-то сломалось" });
   }
 });
