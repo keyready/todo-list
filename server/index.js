@@ -5,12 +5,7 @@ const { log } = require("console");
 
 const app = express();
 const port = 5000;
-let todos_list = [
-  { id: 1, title: "Вечерний хлобысь", status: "active" },
-  { id: 2, title: "Вечерний хлобысь", status: "active" },
-  { id: 3, title: "Вечерний хлобысь", status: "active" },
-  { id: 4, title: "Вечерний хлобысь", status: "active" },
-];
+let todos_list = [];
 
 app.use(cors());
 app.use(express.json());
@@ -23,7 +18,7 @@ app.post("/login_user", (req, res) => {
     username,
   });
 });
-
+console.log(todos_list);
 app.get("/get_todos", (req, res) => {
   res.status(200).json(todos_list);
 });
