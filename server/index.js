@@ -18,7 +18,8 @@ app.post("/login_user", (req, res) => {
     username,
   });
 });
-console.log(todos_list);
+
+
 app.get("/get_todos", (req, res) => {
   res.status(200).json(todos_list);
 });
