@@ -35,7 +35,6 @@ app.get("/get_todos", (req, res) => {
 app.post("/complete_todo", (req, res) => {
   try{
     const { todoId } = req.body;
-
     todos_list.map((element) => {
       if (todoId === element.id) {
         element.status = "completed";
@@ -51,7 +50,6 @@ app.post("/complete_todo", (req, res) => {
 app.post("/delete_todo", (req, res) => {
   try {
     const { todoId } = req.body;
-
     todos_list = todos_list.filter((todo) => todoId !== todo.id);
     return res.status(200).json(todos_list);
   } catch (error) {
@@ -62,7 +60,6 @@ app.post("/delete_todo", (req, res) => {
 app.post("/create_todo", (req, res) => {
   try {
     const { title } = req.body;
-
     todos_list.push({
       title: title,
       status: "active",
@@ -78,7 +75,6 @@ app.post("/create_todo", (req, res) => {
 app.post("/change_todo_title", (req, res) => {
   try {
     const { todoId, newTitle } = req.body;
-
     todos_list.map((todo) => {
       if (todo.id === todoId) {
         todo.title = newTitle;
