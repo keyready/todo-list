@@ -10,5 +10,5 @@
 
 - и по корневому маршруту (`app.get('/', (...)`) ты отдаешь файлик
    ```javascript 
-   res.sendFile(path.resolve(__dirname, '../build/index.html')))
+   res.sendFile(path.resolve(__dirname, '../build/index.html'))
    ```

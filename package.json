@@ -1,0 +1,17 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "**1. Релизовать базовый CRUD-api (без базы данных) с тудушками:**\r 1. **Создание тудушки**  \r    Запрос `POST /create_todo` c `body={title: string}`\r 2. **Удаление тудушки**  \r    Запрос `POST /delete_todo` c `body={todoId: number}`\r 3. **Получение всех тудушек**  \r    Запрос `GET /get_toodos` в ответ жду\r    ```\r    {\r       todos: [ \r          { id: number, title: string, status: 'active' | 'completed' },\r          {...},\r           ...\r       ]\r    }\r    ```\r 7. **Изменение статуса тудушки (`'active' -> 'completed'`)**  \r    Запрос `POST /complete_todo` c `body={todoId: number}`\r 8. **Изменение названия тудушки**  \r    Запрос `POST /change_todo_title` c `body={todoId: number, newTitle: string}`\r ___\r **2. Подключить базу данных и релизовать базовый CRUD-api:**\r 1. Создать директорию `config` с файлом `db.connect.js`, настроить там подлючение к бд\r 2. Создать директорию `models` с файлом `todo.model.js`, описать модель тудушкки:\r    ```\r    title: string\r    status: string, значение по умолчанию: 'active'\r    ```\r 3. Изменить файл сервера так, чтобы тудушки хранились в базе данных",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.3",
+    "path": "^0.12.7"
+  }
+}
