@@ -2,6 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { log } = require("console");
+const mongoose = require('mongoose');
+
+const { username, password } = require('./models/index');
+
 
 const app = express();
 const port = 5000;
@@ -10,6 +14,15 @@ let todos_list = [];
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "../dist")));
+const start = async () => {
+  await mongoose.connect('mongodb://127.0.0.1:27017/TODO_ID_PASSWORD');
+  // await mongoose.connect('mongodb://host.docker.internal:27017/TODO_ID_PASSWORD');
+  
+  app.listen(port, () => {
+      console.log(`Server started on http://localhost:${port}`);
+  });
+};
+
 
 app.post("/login_user", (req, res) => {
   try {
